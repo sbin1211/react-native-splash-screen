@@ -40,21 +40,9 @@ public class SplashScreen {
                         mSplashDialog.show();
                     }
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                View decorView =  mSplashDialog.getWindow().getDecorView();
-                decorView.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
-                @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-                @Override
-                public WindowInsets onApplyWindowsInsets(View v, WindowInsets insets) {
-                    WindowInsets defaultInsets = v.onApplyWindowInsets(insets);
-                    return defaultInsets.replaceSystemWindowInsets(
-                            defaultInsets.getSystemWindowInsetLeft(),
-                            0,
-                            defaultInsets.getSystemWindowInsetRight(),
-                            defaultInsets.getSystemWindowInsetBottom());
-                }
-            });
-         }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        setTranslucent();
+                        }
 
                 }
             }
@@ -110,4 +98,23 @@ public class SplashScreen {
             }
         });
     }
+
+        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+        private void setTranslucent() {
+        if (mSplashDialog != null){
+                View decorView =  mSplashDialog.getWindow().getDecorView();
+                decorView.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
+                    @Override
+                    public WindowInsets onApplyWindowInsets(View v, WindowInsets insets) {
+                        WindowInsets defaultInsets = v.onApplyWindowInsets(insets);
+                        return defaultInsets.replaceSystemWindowInsets(
+                                defaultInsets.getSystemWindowInsetLeft(),
+                                0,
+                                defaultInsets.getSystemWindowInsetRight(),
+                                defaultInsets.getSystemWindowInsetBottom());
+                    }
+                });
+            }
+        }
+
 }
