@@ -114,6 +114,7 @@ public class SplashScreen {
                                 defaultInsets.getSystemWindowInsetBottom());
                     }
                 });
+                ViewCompat.requestApplyInsets(decorView);
             }
         }
 
