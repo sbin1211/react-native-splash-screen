@@ -1,9 +1,13 @@
 package org.devio.rn.splashscreen;
-
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Build;
-
+import android.os.Build;
+import android.view.View;
+import android.view.WindowInsets;
+import android.view.WindowManager;
+import android.annotation.TargetApi;
 import java.lang.ref.WeakReference;
 
 /**
@@ -35,6 +39,23 @@ public class SplashScreen {
                     if (!mSplashDialog.isShowing()) {
                         mSplashDialog.show();
                     }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                View decorView =  mSplashDialog.getWindow().getDecorView();
+                decorView.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
+                @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                @Override
+                public WindowInsets onApplyWindowsInsets(View v, WindowInsets insets) {
+                    WindowInsets defaultInsets = v.onApplyWindowInsets(insets);
+                    return defaultInsets.replaceSystemWindowInsets(
+                            defaultInsets.getSystemWindowInsetLeft(),
+                            0,
+                            defaultInsets.getSystemWindowInsetRight(),
+                            defaultInsets.getSystemWindowInsetBottom());
+                }
+            });
+         }
+
                 }
             }
         });
