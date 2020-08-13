@@ -100,7 +100,7 @@ public class SplashScreen {
     }
 
         @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-        private void setTranslucent() {
+        private static void setTranslucent() {
         if (mSplashDialog != null){
                 View decorView =  mSplashDialog.getWindow().getDecorView();
                 decorView.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
